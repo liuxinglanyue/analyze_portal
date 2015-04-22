@@ -66,9 +66,10 @@ $(function(){
 			<option value="20007">鹏博士</option>
 			<option value="0">其他</option>
 		</select>
+	</br>
 	开始时间:<input type="text" name="start_time">
 	结束时间:<input type="text" name="end_time">
-    <input type="submit" value="登陆">
+    <input type="submit" value="查询">
 </form>
 </body>
 </html>
