@@ -3,13 +3,17 @@
 <link rel="stylesheet" type="text/css" href="assets/style.css" />
 <link rel="stylesheet" type="text/css" href="assets/prettify.css" />
 <link rel="stylesheet" type="text/css" href="assets/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="assets/jquery-ui-timepicker-addon.css" />
 <script type="text/javascript" src="assets/jquery.js"></script>
 <script type="text/javascript" src="assets/jquery-ui.min.js"></script>
 <script type="text/javascript" src="assets/prettify.js"></script>
 <script type="text/javascript" src="assets/jquery.multiselect.js"></script>
+<script type="text/javascript" src="assets/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript">
 $(function(){
 	$("select").multiselect();
+	$("#datetime1").datetimepicker({ dateFormat: 'yy-mm-dd '});
+	$("#datetime2").datetimepicker({ dateFormat: 'yy-mm-dd '});
 });
 </script>
 <head>
@@ -68,8 +72,8 @@ $(function(){
 		</select>
 	</br>
 	</br>
-	开始时间:<input type="text" name="start_time">
-	结束时间:<input type="text" name="end_time">
+	开始时间:<input id="datetime1" type="text" name="start_time">
+	结束时间:<input id="datetime2" type="text" name="end_time">
     <input type="submit" value="查询">
 </form>
 </br>
