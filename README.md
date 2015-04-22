@@ -17,3 +17,16 @@
 查询结果展示：
 
 省份	运营商	SP	最大带宽
+
+# 安装运行
+
+安装go省略
+
+![install](/pic/guide.png)
+
+# 运行界面
+
+![isp](/pic/isp.png)
+
+![time](/pic/time.png)
+
