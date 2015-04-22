@@ -18,6 +18,12 @@ func flowrate(w http.ResponseWriter, r *http.Request) {
 	} else {
 		r.ParseForm()
 
+		if r.FormValue("start_time") == "" || r.FormValue("end_time") == "" {
+			t, _ := template.ParseFiles("flowrate.gtpl")
+			t.Execute(w, "时间不可为空!")
+			return
+		}
+
 		dis_str := strings.Join(r.Form["dis"], ",")
 		isp_str := strings.Join(r.Form["isp"], ",")
 		//fmt.Println(dis_str, isp_str)
