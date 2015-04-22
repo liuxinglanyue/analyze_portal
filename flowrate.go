@@ -2,7 +2,7 @@
 package main
 
 import (
-	"fmt"
+	//"fmt"
 	"html/template"
 	//"log"
 	"net/http"
@@ -20,23 +20,27 @@ func flowrate(w http.ResponseWriter, r *http.Request) {
 
 		dis_str := strings.Join(r.Form["dis"], ",")
 		isp_str := strings.Join(r.Form["isp"], ",")
-		fmt.Println(dis_str, isp_str)
+		//fmt.Println(dis_str, isp_str)
 
 		var hql string
-		hql = "SELECT record_time, sum(flow_rate) FROM r_sector_flow_5 where record_time >= '" + r.FormValue("start_time") + "' and record_time < '" + r.FormValue("end_time") + "' and sp_code in ('" + strings.Replace(r.FormValue("code"), ",", "','", -1) + "') "
+		hql = "SELECT record_time, sum(flow_rate) FROM r_sector_flow_5 where record_time >= '" + r.FormValue("start_time") + "' and record_time < '" + r.FormValue("end_time") + "' "
 
 		var app_dis string
 		var app_isp string
+		var app_sp string
 		if strings.Count(dis_str, ",") != 33 && dis_str != "" {
 			app_dis = " and district_id in (" + dis_str + ") "
 		}
 		if strings.Count(isp_str, ",") != 7 && isp_str != "" {
 			app_isp = " and isp_id in (" + isp_str + ") "
 		}
+		if r.FormValue("code") != "" {
+			app_sp = " and sp_code in ('" + strings.Replace(r.FormValue("code"), ",", "','", -1) + "') "
+		}
 		//fmt.Fprintf(w, search(hql+app_isp+app_dis+" group by record_time"))
 		t, _ := template.ParseFiles("flowrate.gtpl")
 
-		t.Execute(w, search(hql+app_isp+app_dis+" group by record_time"))
+		t.Execute(w, search(hql+app_isp+app_dis+app_sp+" group by record_time"))
 	}
 }
 
