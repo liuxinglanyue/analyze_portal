@@ -21,8 +21,8 @@ func search(hql string) string {
 	m := map[string]float64{}
 	var max_flow float64
 	var max_time string
-
-	for rows.Next() {
+	
+		for rows.Next() {
 		var time string
 		var flow float64
 		err = rows.Scan(&time, &flow)
@@ -49,6 +49,34 @@ func search(hql string) string {
 	sum = max_flow / 1024 / 1024 / 300 * 8
 
 	return "时间：" + max_time + "  带宽：" + strconv.FormatFloat(sum, 'f', 2, 32) + "Mbps"
+	
+//	for rows.Next() {
+//		var time string
+//		var flow float64
+//		err = rows.Scan(&time, &flow)
+//		checkErr(err)
+
+//		var old_flow float64
+//		old_flow = m[time]
+//		if old_flow == 0 {
+//			m[time] = flow
+//		} else {
+//			m[time] = old_flow + flow
+//		}
+
+//		if m[time] > max_flow {
+//			max_flow = m[time]
+//			max_time = time
+//		}
+//	}
+
+//	db.Close()
+//	//fmt.Println(max_time, max_flow)
+
+//	var sum float64
+//	sum = max_flow / 1024 / 1024 / 300 * 8
+
+//	return "时间：" + max_time + "  带宽：" + strconv.FormatFloat(sum, 'f', 2, 32) + "Mbps"
 }
 
 func checkErr(err error) {
