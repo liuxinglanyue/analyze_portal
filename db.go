@@ -46,7 +46,7 @@ func search(hql string) string {
 	//fmt.Println(max_time, max_flow)
 
 	var sum float64
-	sum = max_flow / 1024 / 1024 * 8
+	sum = max_flow / 1024 / 1024 / 300 * 8
 
 	return "时间：" + max_time + "  带宽：" + strconv.FormatFloat(sum, 'f', 2, 32) + "Mbps"
 }
