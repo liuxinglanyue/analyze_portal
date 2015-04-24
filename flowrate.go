@@ -30,7 +30,7 @@ func flowrate(w http.ResponseWriter, r *http.Request) {
 
 		var hql string
 		//hql = "SELECT record_time, sum(flow_rate) FROM r_sector_flow_5 where record_time >= '" + r.FormValue("start_time") + "' and record_time < '" + r.FormValue("end_time") + "' "
-		hql = "select district_id,isp_id,sp_code,sum(flow_rate) from r_sector_flow_5 where record_time >= '" + r.FormValue("start_time") + "' and record_time < '" + r.FormValue("end_time") + "' "
+		hql = "select record_time,sum(flow_rate),district_id,isp_id,sp_code from r_sector_flow_5 where record_time >= '" + r.FormValue("start_time") + "' and record_time < '" + r.FormValue("end_time") + "' "
 		
 		var app_dis string
 		var app_isp string
@@ -47,7 +47,7 @@ func flowrate(w http.ResponseWriter, r *http.Request) {
 		//fmt.Fprintf(w, search(hql+app_isp+app_dis+" group by record_time"))
 		t, _ := template.ParseFiles("flowrate.gtpl")
 
-		t.Execute(w, search(hql+app_isp+app_dis+app_sp+" group by district_id,isp_id,sp_code,record_time"))
+		t.Execute(w, search(hql+app_isp+app_dis+app_sp+" group by district_id,isp_id,sp_code,record_time order by district_id"))
 	}
 }
 

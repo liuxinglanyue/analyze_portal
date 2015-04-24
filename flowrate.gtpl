@@ -14,6 +14,30 @@ $(function(){
 	$("select").multiselect();
 	$("#datetime1").datetimepicker({ dateFormat: 'yy-mm-dd '});
 	$("#datetime2").datetimepicker({ dateFormat: 'yy-mm-dd '});
+
+	Date.prototype.Format = function(fmt){ //author: meizz  
+	 	var o = {  
+	   "M+" : this.getMonth()+1,                 //月份  
+	   "d+" : this.getDate(),                    //日  
+	   "h+" : this.getHours(),                   //小时  
+	   "m+" : this.getMinutes(),                 //分  
+	   "s+" : this.getSeconds(),                 //秒  
+	   "q+" : Math.floor((this.getMonth()+3)/3), //季度  
+	   "S"  : this.getMilliseconds()             //毫秒  
+  	}; 
+	  if(/(y+)/.test(fmt))  
+	    fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));  
+	  for(var k in o)  
+	    if(new RegExp("("+ k +")").test(fmt))  
+	  fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));  
+	  return fmt;  
+	}
+	var endDate = new Date();
+	var startDate = new Date(endDate.getTime()-24*60*60*1000);
+
+	$("#datetime1").val(startDate.Format("yyyy-MM-dd hh:mm"));
+	$("#datetime2").val(endDate.Format("yyyy-MM-dd hh:mm"));
+
 });
 </script>
 <head>
@@ -77,6 +101,31 @@ $(function(){
     <input type="submit" value="查询">
 </form>
 </br>
-{{.}}
+
+
+
+
+
+<table  border="1">
+  <tr>
+    <th width="10%">省份</th>
+    <th width="10%">运营商</th>
+	<th width="10%">sp</th>
+	<th width="10%">最大带宽</th>
+	<th width="20%">时间</th>
+  </tr>
+{{range .}}
+
+  <tr>
+    <td>{{ .District}}</td>
+    <td>{{ .Isp}}</td>
+    <td>{{ .SpCode}}</td>
+	<td>{{ .MaxFlow}}</td>
+    <td>{{ .Time}}</td>
+  </tr>
+{{end}}
+</table>
+
+
 </body>
 </html>
