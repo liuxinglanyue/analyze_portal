@@ -47,7 +47,7 @@ func flowrate(w http.ResponseWriter, r *http.Request) {
 		//fmt.Fprintf(w, search(hql+app_isp+app_dis+" group by record_time"))
 		t, _ := template.ParseFiles("flowrate.gtpl")
 
-		t.Execute(w, search(hql+app_isp+app_dis+app_sp+" group by district_id,isp_id,sp_code,record_time order by district_id"))
+		t.Execute(w, search(hql+app_isp+app_dis+app_sp+" group by district_id,isp_id,sp_code,record_time "))
 	}
 }
 

@@ -130,6 +130,7 @@ func  search(hql string) []Info {
 				keys.Time = key
 			}
 		}
+		//1024.1024.300*8=39321600
 		keys.MaxFlow = strconv.FormatFloat(maxFlow/39321600,'f', 2, 32)+"Mbps"
 		resultData[i] = keys
 		i++

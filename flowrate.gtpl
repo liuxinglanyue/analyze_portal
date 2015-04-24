@@ -33,6 +33,10 @@ $(function(){
 	  return fmt;  
 	}
 	var endDate = new Date();
+	var minutes = endDate.getMinutes();
+	minutes = 5*(parseInt(minutes/5));
+	console.log(minutes);
+	endDate.setMinutes(minutes);
 	var startDate = new Date(endDate.getTime()-24*60*60*1000);
 
 	$("#datetime1").val(startDate.Format("yyyy-MM-dd hh:mm"));
